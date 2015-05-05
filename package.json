@@ -1,0 +1,16 @@
+{
+  "name": "DcardSearcher",
+  "version": "1.0.0",
+  "description": "Search Dcard's contents with more customization.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Kai Hao",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "^4.12.3",
+    "google": "^1.1.0"
+  }
+}

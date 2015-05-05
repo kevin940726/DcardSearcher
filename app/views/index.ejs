@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="index">
+<head> 
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <title>Dcard Searcher</title>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="container">
+        <h3>Dcard Searcher</h3>
+        <form class="form-inline" ng-submit="searchBtn()">
+            <input type="text" id="searchInput" class="form-control" placeholder="Text input" ng-model="query" autofocus>
+            <input type="submit" class="btn btn-primary" href="#" id="searchBtn" ng-click="searchBtn()" value="Search">
+        </form>
+        
+        <br></br>
+
+        <div ng-show="loading">Loading...</div>
+        
+        <div class="list-group" id="resultTable">
+          <a href="{{result.link}}" target="_blank" class="list-group-item" ng-repeat="result in results | startFrom: currentPage*10 | limitTo: 10">
+            <h4 class="list-group-item-heading" ng-bind="result.title.substring(0, result.title.indexOf('- Dcard'))"></h4>
+            <span ng-bind="getCategory(result.link)"></span>
+            <p class="list-group-item-text" ng-bind="result.description"></p>
+          </a>
+        </div>
+
+        <nav ng-show="results != null">
+          <ul class="pagination">
+            <li>
+              <a href="#" ng-class="currentPage <= 0 ? 'btn disabled' : ''" ng-click="changePage(currentPage-1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li ng-repeat="page in getNumber(getPageNum(results)) track by $index" ng-class="pageClass({{$index}})" ng-click="changePage($index)"><a href="#">{{$index+1}}</a></li>
+            <li>
+              <a href="#" ng-class="currentPage >= getPageNum(results)-1 ? 'btn disabled' : ''" aria-label="Next" ng-click="changePage(currentPage+1)">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
