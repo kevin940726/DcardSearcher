@@ -5,21 +5,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <meta name="description" content="Search Dcard's contents like a charm.">
+    <meta name="author" content="Kai Hao">
+    <link rel="icon" href="img/favicon_32.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
 
     <title>Dcard Searcher</title>
 </head>
 <body ng-controller="mainCtrl">
     <div class="container">
-        <h3>Dcard Searcher</h3>
+        <h2>Dcard Searcher</h2>
         <form class="form-inline" ng-submit="searchBtn()">
             <select class="form-control" ng-model="selectCategory" ng-options="k as v for (k, v) in category">
             </select>
-            <input type="text" id="searchInput" class="form-control" placeholder="Text input" ng-model="query" autofocus>
-            <input type="submit" class="btn btn-primary" href="#" id="searchBtn" ng-click="searchBtn()" value="Search">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Text input" ng-model="query" autofocus>    
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-primary" href="#" id="searchBtn" ng-click="searchBtn()" value="Search">
+                </span>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" ng-model="titleSearch"> 搜尋標題</label>
+                <label><input type="checkbox" ng-model="strictSearch"> 完全符合</label>
+            </div>
         </form>
         
         <br></br>
@@ -29,7 +38,7 @@
         <div class="list-group" id="resultTable">
           <a href="{{result.link}}" target="_blank" class="list-group-item" ng-repeat="result in results | startFrom: currentPage*10 | limitTo: 10">
             <h4 class="list-group-item-heading" ng-bind="result.title.substring(0, result.title.indexOf('- Dcard'))"></h4>
-            <span ng-bind="getCategory(result.link)"></span>
+            <h4><small ng-bind="getCategory(result.link)"></small></h4>
             <p class="list-group-item-text" ng-bind="result.description"></p>
           </a>
         </div>
