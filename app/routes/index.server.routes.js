@@ -1,5 +1,4 @@
 var google = require('google');
-var scraper = require('google-search-scraper');
 
 module.exports = function(app) {
 
