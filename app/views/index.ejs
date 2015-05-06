@@ -16,6 +16,8 @@
     <div class="container">
         <h3>Dcard Searcher</h3>
         <form class="form-inline" ng-submit="searchBtn()">
+            <select class="form-control" ng-model="selectCategory" ng-options="k as v for (k, v) in category">
+            </select>
             <input type="text" id="searchInput" class="form-control" placeholder="Text input" ng-model="query" autofocus>
             <input type="submit" class="btn btn-primary" href="#" id="searchBtn" ng-click="searchBtn()" value="Search">
         </form>

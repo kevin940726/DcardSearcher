@@ -12,10 +12,12 @@ index.controller('mainCtrl', function($scope, $http, $location) {
 	$scope.currentPage = 0;
 
  	$scope.searchBtn = function(){
+ 		console.log($scope.selectCategory);
  		if (!$scope.query) return;
  		$scope.loading = true;
  		$scope.results = null;
- 		$http.get('search/'+$scope.query).then(function(response) {
+ 		var searchSite = $scope.selectCategory == "all" ? "" : "/" + $scope.selectCategory;
+ 		$http.get('search/' + $scope.query + searchSite).then(function(response) {
  			$scope.results = response.data;
  		}, function(err) {
  			console.log(err);
@@ -43,7 +45,6 @@ index.controller('mainCtrl', function($scope, $http, $location) {
 
 	$scope.category = {
 		"all": "全部",
-		"ntu": "台灣大學",
 		"funny": "有趣",
 		"bg": "男女",
 		"trending": "時事",
@@ -61,12 +62,15 @@ index.controller('mainCtrl', function($scope, $http, $location) {
 		"sex": "西斯",
 		"dcard": "Dcard",
 		"delete": "刪文",
-		"whysoserious": "廢文"
+		"whysoserious": "廢文",
+		"ntu": "台灣大學"
 	};
 
 	$scope.getCategory = function(link){
 		var matches = (/www.dcard.tw\/f\/(\w+)\//g).exec(link);
 		return typeof $scope.category[matches[1]] == undefined ? null : $scope.category[matches[1]];
 	}
+
+	$scope.selectCategory = "all";
 
 });
